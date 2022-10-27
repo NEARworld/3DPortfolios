@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+    }
+  </style>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.145.0/build/three.module.js"
+      }
+    }
+  </script>
+</head>
+<body>
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'https://unpkg.com/three@0.145.0/examples/jsm/controls/OrbitControls.js';
+    // import { GLTFLoader } from 'https://unpkg.com/three@0.145.0/examples/jsm/loaders/GLTFLoader.js';
+    import { FBXLoader } from 'https://unpkg.com/three@0.145.0/examples/jsm/loaders/FBXLoader.js';
+    const loader = new FBXLoader();
+    loader.load( 'mega_temple.fbx', function ( object ) {
+      object.traverse(function(child) {
+        if (child.isMesh) {
+          child.castShadow = true;
+          child.receiveShadow = true;
+        }
+      });
+      // center the model
+      const box = new THREE.Box3().setFromObject( object );
+      const center = box.getCenter( new THREE.Vector3() );
+      object.position.x += ( object.position.x - center.x );
+      object.position.y += ( object.position.y - center.y );
+      object.position.z += ( object.position.z - center.z );
+      console.log(object);
+      scene.add( object );
+    }, undefined, function ( error ) {
+      console.error( error );
+    } );
+
+    let geometry, material;
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+    
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 100000);
+    const orbitControls = new OrbitControls( camera, renderer.domElement );
+    orbitControls.autoRotate = true
+    camera.position.z = 10000;
+    camera.position.y = 7000;
+    camera.position.x = 10000;
+    camera.lookAt(0, 0, 0);
+    
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    const light = new THREE.PointLight(0xffbb00, 1, 100000)
+    light.position.set( 1, 3000, 6000 );
+    light.rotation.x = 2;
+    light.castShadow = true;
+    scene.add(light);
+    const light2 = new THREE.PointLight(0xffbb00, 1, 100000)
+    light2.position.set( 3000, 3000, 1 );
+    light2.rotation.x = 2;
+    light2.castShadow = true;
+    scene.add(light2);
+
+    geometry = new THREE.PlaneGeometry(3, 3);
+    material = new THREE.MeshPhongMaterial({color: 0xbae34});
+    const plane = new THREE.Mesh(geometry, material);
+    plane.rotation.x = 5;
+    plane.position.y = -1;
+    plane.receiveShadow = true;
+    scene.add(plane);
+    
+    geometry = new THREE.BoxGeometry(1, 1, 1);
+    material = new THREE.MeshPhongMaterial({color: 0xbae34});
+    const cube = new THREE.Mesh(geometry, material);
+    cube.castShadow = true;
+    scene.add(cube);
+
+    // const helper = new THREE.CameraHelper( light.shadow.camera );
+    // scene.add( helper );
+    function animate() {
+      requestAnimationFrame( animate );
+      // required if controls.enableDamping or controls.autoRotate are set to true
+      orbitControls.update();
+      renderer.render( scene, camera );
+      }
+      animate();
+  </script>
+</body>
+</html>
