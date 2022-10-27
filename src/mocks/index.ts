@@ -28,11 +28,19 @@ export const portfolios = {
   Three: [
     {
       id: 4,
-      title: "interactive cubes",
+      title: "Interactive cubes",
       thumbnail: "https://i.imgur.com/HGsdMQa.png",
       gif: 'https://i.imgur.com/2JtNiKR.gif',
       link: "https://gleaming-starlight-9402fc.netlify.app/",
       repoUrl: "https://github.com/NEARworld/3DPortfolios/tree/main/portfolios/interactive_cubes",
+    },
+    {
+      id: 5,
+      title: "Orbiting 3D temple",
+      thumbnail: "https://i.imgur.com/O3hDkwS.png",
+      gif: 'https://i.imgur.com/Z0rC5VG.gif',
+      link: "https://resonant-pie-d965b1.netlify.app/",
+      repoUrl: "https://github.com/NEARworld/3DPortfolios/blob/main/portfolios/temple/index.html",
     }
   ],
 };
