@@ -8,8 +8,8 @@ interface Props {
 }
 
 function Modal({ modalStatus }: Props) {
-  let [react, three, babylon] = Object.values(portfolios);
-  let portfolioArr = [...react, ...three, ...babylon];
+  let [react, three] = Object.values(portfolios);
+  let portfolioArr = [...react, ...three];
   let portfolio = portfolioArr.find((item) => item.id === modalStatus.id);
   return (
     <StyledContainer id="modal-container">
