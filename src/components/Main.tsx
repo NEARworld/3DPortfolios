@@ -10,7 +10,7 @@ function Main() {
   return (
     <StyledContainer>
       <StyledBanner></StyledBanner>
-      {Object.keys(portfolios).map((key: "React" | "Three" | "Babylon") => {
+      {Object.keys(portfolios).map((key: "React" | "Three") => {
         return (
           <>
             <StyledHead>{key}</StyledHead>
