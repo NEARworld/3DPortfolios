@@ -16,5 +16,4 @@ export default App;
 const StyledContainer = styled.div`
   @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200&display=swap");
   font-family: "Roboto Mono", monospace;
-  background-color: #fff0e5;
 `;

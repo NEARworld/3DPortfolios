@@ -38,7 +38,7 @@ const StyledSection = styled.section`
   grid-template-columns: repeat(6, 1fr);
   gap: 10px;
   height: 400px;
-  margin: 0 10px;
+  margin: 0 10px 40px 10px;
   align-items: center;
 `;
 const StyledHead = styled.h1`
